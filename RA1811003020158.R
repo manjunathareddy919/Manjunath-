@@ -1,0 +1,12 @@
+link<-"https://www.imdb.com/list/ls093380413/"
+library(robotstxt) 
+path<-paths_allowed(link)
+library(rvest) 
+web<-read_html(link) 
+library(dplyr) 
+series_Name<-web%>%html_nodes(".lister-item-header a")%>%html_text()
+runtime<-web%>%html_nodes(".runtime")%>%html_text()
+rating<-web%>%html_nodes(".ipl-rating-star.small .ipl-rating-star__rating")%>%html_text()
+genre<-web%>%html_nodes(".genre")%>%html_text()
+best<-data.frame(series_Name,runtime,rating,genre) 
+View(best)
